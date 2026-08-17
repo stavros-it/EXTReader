@@ -1,5 +1,5 @@
-using ExtFsViewer.Models;
-using ExtFsViewer.ViewModels;
+using EXTReader.Models;
+using EXTReader.ViewModels;
 
 string imagePath = args.Length > 0 ? args[0] : "test_ext4.img";
 

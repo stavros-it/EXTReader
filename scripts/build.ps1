@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Build script for EXT FS Viewer — produces a portable single-file exe.
+    Build script for EXTReader — produces a portable single-file exe.
 .DESCRIPTION
     Cleans, restores, builds, publishes (single-file self-contained win-x64),
     copies native DLLs, and zips the output.
@@ -16,9 +16,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $repoRoot = Resolve-Path "$PSScriptRoot\.."
-$project = "$repoRoot\src\ExtFsViewer\ExtFsViewer.csproj"
+$project = "$repoRoot\src\EXTReader\EXTReader.csproj"
 
-Write-Host "=== EXT FS Viewer Build ===" -ForegroundColor Cyan
+Write-Host "=== EXTReader Build ===" -ForegroundColor Cyan
 Write-Host "Configuration: $Configuration"
 Write-Host "Output:        $OutputDir"
 Write-Host "Project:       $project"
@@ -59,7 +59,7 @@ Write-Host "      Published." -ForegroundColor Green
 
 # 5. Copy native DLLs (libext2fs.dll + libwinpthread-1.dll)
 Write-Host "[5/6] Copying native DLLs…" -ForegroundColor Yellow
-$nativeSrc = "$repoRoot\src\ExtFsViewer"
+$nativeSrc = "$repoRoot\src\EXTReader"
 Copy-Item "$nativeSrc\libext2fs.dll" -Destination "$OutputDir\libext2fs.dll" -Force
 Copy-Item "$nativeSrc\libwinpthread-1.dll" -Destination "$OutputDir\libwinpthread-1.dll" -Force
 Write-Host "      libext2fs.dll:     $((Get-Item "$OutputDir\libext2fs.dll").Length) bytes" -ForegroundColor Green
@@ -69,9 +69,9 @@ Write-Host "      libwinpthread-1.dll: $((Get-Item "$OutputDir\libwinpthread-1.d
 if (-not $NoZip)
 {
     Write-Host "[6/6] Zipping output…" -ForegroundColor Yellow
-    $version = (Get-Item "$OutputDir\ExtFsViewer.exe").VersionInfo.ProductVersion
+    $version = (Get-Item "$OutputDir\EXTReader.exe").VersionInfo.ProductVersion
     if (-not $version) { $version = "1.0.0" }
-    $zipName = "ExtFsViewer-$version-win-x64.zip"
+    $zipName = "EXTReader-$version-win-x64.zip"
     $zipPath = Join-Path (Split-Path $OutputDir) $zipName
     if (Test-Path $zipPath) { Remove-Item $zipPath -Force }
     Compress-Archive -Path "$OutputDir\*" -DestinationPath $zipPath -CompressionLevel Optimal
@@ -82,11 +82,11 @@ if (-not $NoZip)
 Write-Host ""
 Write-Host "=== BUILD COMPLETE ===" -ForegroundColor Cyan
 Write-Host "Output directory: $OutputDir"
-$exe = Get-Item "$OutputDir\ExtFsViewer.exe" -ErrorAction SilentlyContinue
+$exe = Get-Item "$OutputDir\EXTReader.exe" -ErrorAction SilentlyContinue
 if ($exe)
 {
     $exeSize = [math]::Round($exe.Length / 1MB, 1)
-    Write-Host "ExtFsViewer.exe: $exeSize MB"
+    Write-Host "EXTReader.exe: $exeSize MB"
 }
 Write-Host ""
 Write-Host "Files in output:"

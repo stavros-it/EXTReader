@@ -1,4 +1,4 @@
-# roadmap.md — EXT FS Viewer Implementation Roadmap
+# roadmap.md — EXTReader Implementation Roadmap
 
 > Phased implementation plan. Checkboxes are updated by the Technical Lead at the end of every significant task.
 > Last updated: 2026-08-01 (Phase 5 — COMPLETE).
@@ -9,7 +9,7 @@
 
 - [x] 0.1 Install MSYS2 (`winget install MSYS2.MSYS2`). **Done** — MSYS2 20260611 installed.
 - [x] 0.2 Obtain `libext2fs.dll` + headers. **Done** — MSYS2 has NO e2fsprogs package; built `libext2fs.dll` (v1.47.4) from source (kernel.org tarball) using MinGW GCC 16.1.0. Required: compat shim headers (`arpa/inet.h`, `grp.h`, `pwd.h`, `mntent.h`, `paths.h`, `fcntl.h`, `unistd.h`) + `mingw_compat.c` stubs (`getuid`/`geteuid`/`getgid`/`getegid`/`makedev`/`fcntl`/`sysconf`/`fsync`/`pread`/`pwrite`/`select`). Used `windows_io.c` (native Win32 I/O manager) instead of `unix_io.c`. Final DLL: 2.6 MB, 630 ext2fs_ exports.
-- [x] 0.3 Create solution + WPF project. **Done** — `ExtFsViewer.sln` + `src/ExtFsViewer/ExtFsViewer.csproj` (net8.0-windows, WPF).
+- [x] 0.3 Create solution + WPF project. **Done** — `EXTReader.sln` + `src/EXTReader/EXTReader.csproj` (net8.0-windows, WPF).
 - [x] 0.4 Add NuGet packages. **Done** — WPF-UI 4.3.0, CommunityToolkit.Mvvm 8.4.2.
 - [x] 0.5 Configure csproj for single-file publish. **Done** — `PublishSingleFile`, `SelfContained`, `IncludeNativeLibrariesForSelfExtract`, `IncludeAllContentForSelfExtract`, `EnableReadyToRun`, `RuntimeIdentifier=win-x64` (Release only). `AllowUnsafeBlocks=true` (for `LibraryImport`). `TreatWarningsAsErrors=true`.
 - [x] 0.6 Create folder structure. **Done** — `Interop/` (created, contains `NativeMethods.cs`). `native/` (reference headers). Additional folders (`Services/`, `ViewModels/`, `Views/`, `Models/`) to be created in Phase 1+.
@@ -96,7 +96,7 @@
 - [x] 5.4 Static safety audit script: `scripts/safety-audit.ps1` greps for `GENERIC_WRITE`, `EXT2_FLAG_RW`, `CREATE_ALWAYS`, `OPEN_ALWAYS`, `FileMode.CreateNew/Truncate/Append`. Excludes `SafetySelfCheck.cs` and `Ext2fsConstants.cs` (which define the symbols as warning text/constants, never used in calls). **PASSED**: zero forbidden symbols, all `FileAccess.Write` occurrences verified as destination-only.
 - [x] 5.5 Runtime safety self-check: `SafetySelfCheck.Run()` at startup verifies (1) manifest is `asInvoker`, (2) libext2fs loads and `ext2fs_get_library_version` returns valid version, (3) no write constants in source. Failures shown via MessageBox warning.
 - [x] 5.6 Publish profile: single-file self-contained `win-x64` configured in `csproj` (`PublishSingleFile`, `SelfContained`, `IncludeNativeLibrariesForSelfExtract`, `EnableReadyToRun`). Build produces 163 MB exe + 2.6 MB libext2fs.dll + 66 KB libwinpthread-1.dll.
-- [x] 5.7 `scripts/build.ps1`: 6-step pipeline (clean → restore with `-r win-x64` → build → publish → copy native DLLs → zip). Produces `publish/ExtFsViewer.exe` + `publish/ExtFsViewer-1.0.0-win-x64.zip` (69.2 MB compressed).
+- [x] 5.7 `scripts/build.ps1`: 6-step pipeline (clean → restore with `-r win-x64` → build → publish → copy native DLLs → zip). Produces `publish/EXTReader.exe` + `publish/EXTReader-1.0.0-win-x64.zip` (69.2 MB compressed).
 - [x] 5.8 Smoke test: published exe launches successfully (10-second process check passed).
 - [x] 5.9 `README.md` with usage guide, safety explanation, build instructions, architecture overview, tech stack.
 

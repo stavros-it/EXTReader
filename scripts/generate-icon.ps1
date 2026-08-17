@@ -1,7 +1,7 @@
 Add-Type -AssemblyName System.Drawing
 Add-Type -AssemblyName System.Drawing.Primitives
 
-$outDir = "$PSScriptRoot\..\src\ExtFsViewer"
+$outDir = "$PSScriptRoot\..\src\EXTReader"
 $icoPath = "$outDir\app.ico"
 $pngPath = "$outDir\app_preview.png"
 

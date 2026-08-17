@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ExtFsViewer\ExtFsViewer.csproj" />
+    <ProjectReference Include="..\..\src\EXTReader\EXTReader.csproj" />
   </ItemGroup>
 
 </Project>

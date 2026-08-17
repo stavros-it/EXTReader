@@ -1,4 +1,4 @@
-// Icon generator for EXT FS Viewer
+// Icon generator for EXTReader
 // Run: dotnet run --project scripts/IconGen
 using System.Drawing;
 using System.Drawing.Drawing2D;

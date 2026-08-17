@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Static safety audit for EXT FS Viewer source code.
+    Static safety audit for EXTReader source code.
 .DESCRIPTION
     Greps all .cs files for write-capable symbols that must NEVER appear in
     source-side (EXT filesystem) code paths. The only allowed FileAccess.Write
@@ -10,11 +10,11 @@
 #>
 [CmdletBinding()]
 param(
-    [string]$SourcePath = (Resolve-Path "$PSScriptRoot\..\src\ExtFsViewer").Path
+    [string]$SourcePath = (Resolve-Path "$PSScriptRoot\..\src\EXTReader").Path
 )
 
 $ErrorActionPreference = 'Stop'
-Write-Host "=== EXT FS Viewer Static Safety Audit ===" -ForegroundColor Cyan
+Write-Host "=== EXTReader Static Safety Audit ===" -ForegroundColor Cyan
 Write-Host "Source path: $SourcePath"
 Write-Host ""
 

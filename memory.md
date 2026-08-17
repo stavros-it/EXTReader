@@ -1,6 +1,6 @@
 # memory.md — Operating Rules for Technical Lead / Core Developer
 
-This file is the authoritative source of operational rules for the AI Technical Lead working on the **EXT FS Viewer** project. Read it at the start of every session and obey it without exception.
+This file is the authoritative source of operational rules for the AI Technical Lead working on the **EXTReader** project. Read it at the start of every session and obey it without exception.
 
 ---
 
@@ -116,7 +116,7 @@ A feature is done only when ALL of the following are true:
 
 ## 9. Working Directory & Tooling
 
-- Workspace root: `C:\Users\Stavros\OneDrive\My AI Apps\EXT FS Viewer`
+- Workspace root: `C:\Users\Stavros\OneDrive\My AI Apps\EXTReader`
 - Shell: PowerShell 7+ (`pwsh`). Use full cmdlet names (`Get-ChildItem`, `New-Item`).
 - OS: Windows 11 Enterprise Build 26200.
 - Toolchain confirmed present: .NET 8 SDK (`dotnet 8.0.423`), Rust 1.97, Python 3.12, Node 24, WSL2 (Ubuntu 26.04).
