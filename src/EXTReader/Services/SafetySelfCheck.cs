@@ -9,36 +9,18 @@ public static class SafetySelfCheck
     {
         var failures = new List<string>();
 
-        if (!VerifyManifestIsAsInvoker())
-            failures.Add("Manifest is not asInvoker — app may be running with unnecessary elevation.");
-
-        if (!VerifyNoWriteConstants())
-            failures.Add("Write-capable constants (GENERIC_WRITE/EXT2_FLAG_RW) are present in source code.");
-
         if (!VerifyLibext2fsVersion())
             failures.Add("libext2fs.dll failed to load or version check failed.");
+
+        if (!VerifyReadOnlyFlags())
+            failures.Add("Read-only flag configuration is incorrect (EXT2_FLAG_RW bit must not be set in ReadOnlyFlags).");
 
         return new SafetyCheckResult(failures.Count == 0, failures);
     }
 
-    private static bool VerifyManifestIsAsInvoker()
+    private static bool VerifyReadOnlyFlags()
     {
-        try
-        {
-            using var identity = System.Security.Principal.WindowsIdentity.GetCurrent();
-            var principal = new System.Security.Principal.WindowsPrincipal(identity);
-            return !principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator)
-                || true;
-        }
-        catch
-        {
-            return true;
-        }
-    }
-
-    private static bool VerifyNoWriteConstants()
-    {
-        return !Ext2fsConstants.FlagRw.ToString().Contains("1") || true;
+        return (Ext2fsConstants.ReadOnlyFlags & Ext2fsConstants.FlagRw) == 0;
     }
 
     private static bool VerifyLibext2fsVersion()

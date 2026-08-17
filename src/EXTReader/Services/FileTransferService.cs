@@ -30,18 +30,22 @@ public sealed class FileTransferService
 
         try
         {
-            IntPtr unmanagedBuf = Marshal.AllocHGlobal(ChunkSize);
+            byte[] managedBuf = new byte[ChunkSize];
+            var pin = GCHandle.Alloc(managedBuf, GCHandleType.Pinned);
             try
             {
+                IntPtr bufPtr = pin.AddrOfPinnedObject();
                 await using var destStream = new FileStream(longDest, FileMode.Create, FileAccess.Write, FileShare.None, ChunkSize, useAsync: true);
                 long copied = 0;
+                long totalBytes = ctx.TotalBytes;
+                long startBytes = ctx.BytesCopied;
 
                 while (copied < size)
                 {
                     ct.ThrowIfCancellationRequested();
 
                     uint toRead = (uint)Math.Min(size - copied, ChunkSize);
-                    int readErr = NativeExt2fs.ext2fs_file_read(file, unmanagedBuf, toRead, out uint got);
+                    int readErr = NativeExt2fs.ext2fs_file_read(file, bufPtr, toRead, out uint got);
 
                     if (readErr != 0)
                         throw new ExtFsException($"ext2fs_file_read failed at offset {copied} with error {readErr}.", readErr);
@@ -49,17 +53,15 @@ public sealed class FileTransferService
                     if (got == 0)
                         break;
 
-                    byte[] managedBuf = new byte[got];
-                    Marshal.Copy(unmanagedBuf, managedBuf, 0, (int)got);
-                    await destStream.WriteAsync(managedBuf, 0, (int)got, ct);
+                    await destStream.WriteAsync(managedBuf.AsMemory(0, (int)got), ct);
 
                     copied += got;
-                    progress?.Report(ctx with { BytesCopied = ctx.BytesCopied + copied, TotalBytes = ctx.TotalBytes });
+                    progress?.Report(ctx with { BytesCopied = startBytes + copied, TotalBytes = totalBytes });
                 }
             }
             finally
             {
-                Marshal.FreeHGlobal(unmanagedBuf);
+                pin.Free();
             }
         }
         finally
