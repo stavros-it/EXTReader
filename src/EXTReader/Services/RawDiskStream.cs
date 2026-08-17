@@ -15,7 +15,7 @@ internal sealed class RawDiskStream : Stream
 
     public RawDiskStream(SafeFileHandle handle, uint sectorSize = 512)
     {
-        _handle = handle;
+        _handle = handle ?? throw new ArgumentNullException(nameof(handle));
         _sectorSize = sectorSize > 0 ? sectorSize : 512;
     }
 

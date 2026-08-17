@@ -235,22 +235,24 @@ public sealed class ExtFileSystemService : IDisposable
             if (size < 0 || size > int.MaxValue)
                 throw new ExtFsException($"File size {size} is too large or invalid for inode {ino}.");
 
-            byte[] buffer = new byte[size];
             if (size == 0)
-                return buffer;
+                return Array.Empty<byte>();
 
-            IntPtr unmanagedBuf = Marshal.AllocHGlobal((int)size);
+            byte[] buffer = new byte[size];
+            var pin = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
-                uint remaining = (uint)size;
+                IntPtr bufPtr = pin.AddrOfPinnedObject();
+                const uint chunkSize = 1u << 20;
                 uint offset = 0;
+                uint remaining = (uint)size;
 
                 while (remaining > 0)
                 {
                     ct.ThrowIfCancellationRequested();
 
-                    uint toRead = Math.Min(remaining, 1u << 20);
-                    int readErr = NativeExt2fs.ext2fs_file_read(file, unmanagedBuf + (int)offset, toRead, out uint got);
+                    uint toRead = Math.Min(remaining, chunkSize);
+                    int readErr = NativeExt2fs.ext2fs_file_read(file, bufPtr + (int)offset, toRead, out uint got);
 
                     if (readErr != 0)
                         throw new ExtFsException($"ext2fs_file_read failed at offset {offset} with error {readErr}.", readErr);
@@ -262,11 +264,12 @@ public sealed class ExtFileSystemService : IDisposable
                     remaining -= got;
                 }
 
-                Marshal.Copy(unmanagedBuf, buffer, 0, (int)offset);
+                if (offset < (uint)size)
+                    Array.Resize(ref buffer, (int)offset);
             }
             finally
             {
-                Marshal.FreeHGlobal(unmanagedBuf);
+                pin.Free();
             }
 
             return buffer;
@@ -294,10 +297,11 @@ public sealed class ExtFileSystemService : IDisposable
                 throw new ExtFsException($"Invalid file size {size} for inode {ino}.");
 
             const int chunkSize = 1 << 20;
-            IntPtr unmanagedBuf = Marshal.AllocHGlobal(chunkSize);
-
+            byte[] managedBuf = new byte[chunkSize];
+            var pin = GCHandle.Alloc(managedBuf, GCHandleType.Pinned);
             try
             {
+                IntPtr bufPtr = pin.AddrOfPinnedObject();
                 await using var destStream = new FileStream(destPath, FileMode.Create, FileAccess.Write, FileShare.None, chunkSize, useAsync: true);
                 long copied = 0;
 
@@ -306,7 +310,7 @@ public sealed class ExtFileSystemService : IDisposable
                     ct.ThrowIfCancellationRequested();
 
                     uint toRead = (uint)Math.Min(size - copied, chunkSize);
-                    int readErr = NativeExt2fs.ext2fs_file_read(file, unmanagedBuf, toRead, out uint got);
+                    int readErr = NativeExt2fs.ext2fs_file_read(file, bufPtr, toRead, out uint got);
 
                     if (readErr != 0)
                         throw new ExtFsException($"ext2fs_file_read failed at offset {copied} with error {readErr}.", readErr);
@@ -314,9 +318,7 @@ public sealed class ExtFileSystemService : IDisposable
                     if (got == 0)
                         break;
 
-                    byte[] managedBuf = new byte[got];
-                    Marshal.Copy(unmanagedBuf, managedBuf, 0, (int)got);
-                    await destStream.WriteAsync(managedBuf, 0, (int)got, ct);
+                    await destStream.WriteAsync(managedBuf.AsMemory(0, (int)got), ct);
 
                     copied += got;
                     progress?.Report((copied, size));
@@ -324,7 +326,7 @@ public sealed class ExtFileSystemService : IDisposable
             }
             finally
             {
-                Marshal.FreeHGlobal(unmanagedBuf);
+                pin.Free();
             }
         }
         finally
