@@ -19,6 +19,10 @@
   A native Windows 11 desktop application for browsing and extracting files from Linux EXT2/EXT3/EXT4 filesystems — strictly <b>read-only</b>.
 </p>
 
+<p align="center">
+  <i>Works on unencrypted EXT partitions and disks. LUKS / fscrypt / encrypted volumes are not supported.</i>
+</p>
+
 ## Features
 
 - **Read-only access** to EXT2/EXT3/EXT4 filesystems via `libext2fs` (e2fsprogs v1.47.4)
