@@ -1,5 +1,14 @@
 # EXTReader
 
+![CI](https://img.shields.io/github/actions/workflow/status/stavros-it/EXTReader/ci.yml?branch=main&label=CI&logo=github)
+![.NET](https://img.shields.io/badge/.NET-8.0-512bd4?logo=dotnet)
+![C#](https://img.shields.io/badge/C%23-12.0-239120?logo=csharp)
+![WPF-UI](https://img.shields.io/badge/WPF--UI-4.3.0-6750A0)
+![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)
+![Tests](https://img.shields.io/badge/tests-16-brightgreen)
+![License](https://img.shields.io/github/license/stavros-it/EXTReader?color=blue)
+![Release](https://img.shields.io/github/v/release/stavros-it/EXTReader?label=release)
+
 A native Windows 11 desktop application for browsing and extracting files from Linux EXT2/EXT3/EXT4 filesystems — strictly **read-only**.
 
 ## Features
