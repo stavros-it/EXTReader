@@ -16,7 +16,7 @@ var source = new ExtSource
 };
 
 using var vm = new BrowserViewModel();
-vm.Open(source);
+vm.OpenAsync(source).Wait();
 
 Console.WriteLine($"1. Opened: {vm.SourceName}");
 Console.WriteLine($"   Path: {vm.CurrentPath}");
