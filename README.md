@@ -34,7 +34,7 @@ The application enforces read-only access through multiple layers:
 
 ### Quick start
 
-1. Download `EXTReader-*.zip` and extract to any folder
+1. Download `EXTReader-*.zip` from the [latest release](https://github.com/stavros-it/EXTReader/releases/latest) and extract to any folder
 2. Run `EXTReader.exe`
 3. Click **Refresh** to scan physical drives for EXT partitions (requires admin)
    - Or click **Open Image…** to open a disk image file (no admin needed)
