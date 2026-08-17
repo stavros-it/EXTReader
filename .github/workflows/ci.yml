@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore EXTReader.sln
+
+      - name: Build
+        run: dotnet build EXTReader.sln -c Debug --no-restore
+
+      - name: Safety audit
+        shell: pwsh
+        run: ./scripts/safety-audit.ps1
+
+      - name: SmokeTest (6 cases)
+        run: dotnet run --project tests/SmokeTest -c Debug --no-build -- "${{ github.workspace }}\tests\test_ext4.img"
+
+      - name: BrowserTest (5 cases)
+        run: dotnet run --project tests/BrowserTest -c Debug --no-build -- "${{ github.workspace }}\tests\test_ext4.img"
+
+      - name: TransferTest (5 cases)
+        run: dotnet run --project tests/TransferTest -c Debug --no-build -- "${{ github.workspace }}\tests\test_ext4.img"
