@@ -161,3 +161,7 @@ EXTReader.exe (WPF + WPF-UI)
 This application is licensed under the [GNU General Public License v2.0](LICENSE) or any later version.
 
 `libext2fs` (e2fsprogs) is licensed under GPL-2.0 / LGPL-2.1; this application links to it dynamically. The bundled `libext2fs.dll` and `libwinpthread-1.dll` binaries in `src/EXTReader/` are redistributed under their respective licenses.
+
+## AI assistance
+
+Parts of this codebase, documentation and commit messages were generated or refined with the help of AI tools. All output was reviewed and accepted by the maintainer before being committed.
