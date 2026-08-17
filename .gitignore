@@ -52,3 +52,15 @@ Desktop.ini
 ## Test runtime artifacts (regenerable)
 tests/**/bin/
 tests/**/obj/
+
+## Duplicate native DLLs at test project roots — the build copies these
+## from src/ExtFsViewer/ via the ProjectReference, so they don't belong
+## in source control.
+tests/SmokeTest/libext2fs.dll
+tests/SmokeTest/libwinpthread-1.dll
+tests/BrowserTest/libext2fs.dll
+tests/BrowserTest/libwinpthread-1.dll
+tests/TransferTest/libext2fs.dll
+tests/TransferTest/libwinpthread-1.dll
+tests/DiskTest/libext2fs.dll
+tests/DiskTest/libwinpthread-1.dll
