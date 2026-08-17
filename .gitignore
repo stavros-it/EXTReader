@@ -1,0 +1,54 @@
+## .NET / Visual Studio build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww][Pp][Ff]t[Pp]mp/
+*.binlog
+*.log
+*.tlog
+
+## NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+project.fragment.json
+artifacts/
+
+## Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.user
+*.sln.docstates
+*.tmp
+*.cache
+*.swp
+
+## MSBuild auto-generated WPF temp projects
+*[_a-zA-Z0-9]*_wpftmp.csproj
+*[_a-zA-Z0-9]*_wpftmp.csproj.*
+
+## Build script output (single-file portable exe + zip)
+publish/
+ExtFsViewer-*.zip
+
+## OS cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+## Test runtime artifacts (regenerable)
+tests/**/bin/
+tests/**/obj/

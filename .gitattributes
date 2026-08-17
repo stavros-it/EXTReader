@@ -1,0 +1,31 @@
+# Default: normalize text line endings on commit, checkout native
+* text=auto eol=lf
+
+# Windows-specific source files
+*.cs       text eol=crlf
+*.xaml     text eol=crlf
+*.csproj   text eol=crlf
+*.sln      text eol=crlf
+*.ps1     text eol=crlf
+*.bat     text eol=crlf
+*.manifest text eol=crlf
+
+# Markdown / docs
+*.md       text eol=lf
+
+# Binary assets — never normalize
+*.dll     binary
+*.exe     binary
+*.pdb     binary
+*.img     binary
+*.iso     binary
+*.vhd     binary
+*.dd      binary
+*.raw     binary
+*.ico     binary
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.bmp     binary
+*.zip     binary
