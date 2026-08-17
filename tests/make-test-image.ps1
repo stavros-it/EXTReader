@@ -23,7 +23,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-Write-Host "=== EXT FS Viewer — test image generator ===" -ForegroundColor Cyan
+Write-Host "=== EXTReader — test image generator ===" -ForegroundColor Cyan
 Write-Host "Output:       $OutPath"
 Write-Host "Size:         $SizeMB MB"
 Write-Host "WSL distro:   $Distribution"

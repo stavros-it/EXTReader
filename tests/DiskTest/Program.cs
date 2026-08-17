@@ -1,5 +1,5 @@
-using ExtFsViewer.Models;
-using ExtFsViewer.Services;
+using EXTReader.Models;
+using EXTReader.Services;
 
 string[] cmdArgs = Environment.GetCommandLineArgs();
 int driveIndex = cmdArgs.Length > 1 ? int.Parse(cmdArgs[1]) : 5;

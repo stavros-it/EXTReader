@@ -1,4 +1,4 @@
-# project_context.md — EXT FS Viewer Architecture Summary
+# project_context.md — EXTReader Architecture Summary
 
 > Living document. Updated by the Technical Lead at the end of every significant task.
 > Last updated: 2026-08-01 (Phase 5 — COMPLETE — ALL PHASES DONE).
@@ -142,7 +142,7 @@ Publish profile (in `.csproj` or `PublishProfile.pubxml`):
 <EnableReadyToRun>true</EnableReadyToRun>
 ```
 
-**Result:** a single `ExtFsViewer.exe` (~70 MB) plus `libext2fs.dll`. Runs from any folder, USB drive, or network share. No install, no framework package, no MSIX.
+**Result:** a single `EXTReader.exe` (~70 MB) plus `libext2fs.dll`. Runs from any folder, USB drive, or network share. No install, no framework package, no MSIX.
 
 ---
 

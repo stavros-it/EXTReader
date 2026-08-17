@@ -41,7 +41,7 @@ artifacts/
 
 ## Build script output (single-file portable exe + zip)
 publish/
-ExtFsViewer-*.zip
+EXTReader-*.zip
 
 ## OS cruft
 Thumbs.db
@@ -54,7 +54,7 @@ tests/**/bin/
 tests/**/obj/
 
 ## Duplicate native DLLs at test project roots — the build copies these
-## from src/ExtFsViewer/ via the ProjectReference, so they don't belong
+## from src/EXTReader/ via the ProjectReference, so they don't belong
 ## in source control.
 tests/SmokeTest/libext2fs.dll
 tests/SmokeTest/libwinpthread-1.dll

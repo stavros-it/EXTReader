@@ -1,4 +1,4 @@
-# EXT FS Viewer
+# EXTReader
 
 A native Windows 11 desktop application for browsing and extracting files from Linux EXT2/EXT3/EXT4 filesystems — strictly **read-only**.
 
@@ -34,8 +34,8 @@ The application enforces read-only access through multiple layers:
 
 ### Quick start
 
-1. Download `ExtFsViewer-*.zip` and extract to any folder
-2. Run `ExtFsViewer.exe`
+1. Download `EXTReader-*.zip` and extract to any folder
+2. Run `EXTReader.exe`
 3. Click **Refresh** to scan physical drives for EXT partitions (requires admin)
    - Or click **Open Image…** to open a disk image file (no admin needed)
 4. Select an EXT source and click **Browse…** to open the file browser
@@ -59,10 +59,10 @@ To read physical disks (`\\.\PhysicalDriveN`), the app must run as Administrator
 ```
 
 This produces:
-- `publish\ExtFsViewer.exe` — single-file self-contained executable
+- `publish\EXTReader.exe` — single-file self-contained executable
 - `publish\libext2fs.dll` — native EXT filesystem library
 - `publish\libwinpthread-1.dll` — MinGW runtime dependency
-- `publish\ExtFsViewer-*.zip` — zipped portable distribution
+- `publish\EXTReader-*.zip` — zipped portable distribution
 
 ### Safety audit
 
@@ -81,7 +81,7 @@ dotnet run --project tests\TransferTest # File/directory copy
 ## Architecture
 
 ```
-ExtFsViewer.exe (WPF + WPF-UI)
+EXTReader.exe (WPF + WPF-UI)
 ├── Interop/
 │   ├── NativeKernel32.cs      — Win32 CreateFileW, DeviceIoControl
 │   ├── NativeExt2fs.cs        — libext2fs P/Invoke (LibraryImport)
@@ -121,4 +121,4 @@ ExtFsViewer.exe (WPF + WPF-UI)
 
 This application is licensed under the [GNU General Public License v2.0](LICENSE) or any later version.
 
-`libext2fs` (e2fsprogs) is licensed under GPL-2.0 / LGPL-2.1; this application links to it dynamically. The bundled `libext2fs.dll` and `libwinpthread-1.dll` binaries in `src/ExtFsViewer/` are redistributed under their respective licenses.
+`libext2fs` (e2fsprogs) is licensed under GPL-2.0 / LGPL-2.1; this application links to it dynamically. The bundled `libext2fs.dll` and `libwinpthread-1.dll` binaries in `src/EXTReader/` are redistributed under their respective licenses.

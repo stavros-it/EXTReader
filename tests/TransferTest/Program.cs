@@ -1,6 +1,6 @@
-using ExtFsViewer.Models;
-using ExtFsViewer.Services;
-using ExtFsViewer.ViewModels;
+using EXTReader.Models;
+using EXTReader.Services;
+using EXTReader.ViewModels;
 
 string imagePath = args.Length > 0 ? args[0] : "test_ext4.img";
 string tempRoot = Path.Combine(Path.GetTempPath(), $"extfs_phase4_test_{Guid.NewGuid():N}");
