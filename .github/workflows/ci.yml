@@ -30,10 +30,10 @@ jobs:
         run: ./scripts/safety-audit.ps1
 
       - name: SmokeTest (6 cases)
-        run: dotnet run --project tests/SmokeTest -c Debug --no-build -- "${{ github.workspace }}\tests\test_ext4.img"
+        run: dotnet run --project tests/SmokeTest -c Debug -- "${{ github.workspace }}\tests\test_ext4.img"
 
       - name: BrowserTest (5 cases)
-        run: dotnet run --project tests/BrowserTest -c Debug --no-build -- "${{ github.workspace }}\tests\test_ext4.img"
+        run: dotnet run --project tests/BrowserTest -c Debug -- "${{ github.workspace }}\tests\test_ext4.img"
 
       - name: TransferTest (5 cases)
-        run: dotnet run --project tests/TransferTest -c Debug --no-build -- "${{ github.workspace }}\tests\test_ext4.img"
+        run: dotnet run --project tests/TransferTest -c Debug -- "${{ github.workspace }}\tests\test_ext4.img"
