@@ -35,6 +35,24 @@
 - Progress reporting with cancellation support
 - Single-file portable executable — no installer required
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/startup.png" alt="EXTReader at startup" width="45%">
+  &nbsp;
+  <img src="docs/screenshots/sources.png" alt="EXTReader source picker" width="45%">
+</p>
+<p align="center">
+  <em>Startup (left) and the source picker showing discovered EXT partitions (right).</em>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/browser.png" alt="EXTReader file browser" width="72%">
+</p>
+<p align="center">
+  <em>File browser: navigate directories, inspect inode metadata, extract files or folders.</em>
+</p>
+
 ## Safety
 
 The application enforces read-only access through multiple layers:
