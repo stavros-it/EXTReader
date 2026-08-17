@@ -1,15 +1,23 @@
-# EXTReader
+<p align="center">
+  <img src="src/EXTReader/app_preview.png" alt="EXTReader icon" width="160">
+</p>
 
-![CI](https://img.shields.io/github/actions/workflow/status/stavros-it/EXTReader/ci.yml?branch=main&label=CI&logo=github)
-![.NET](https://img.shields.io/badge/.NET-8.0-512bd4?logo=dotnet)
-![C#](https://img.shields.io/badge/C%23-12.0-239120?logo=csharp)
-![WPF-UI](https://img.shields.io/badge/WPF--UI-4.3.0-6750A0)
-![Platform](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)
-![Tests](https://img.shields.io/badge/tests-16-brightgreen)
-![License](https://img.shields.io/github/license/stavros-it/EXTReader?color=blue)
-![Release](https://img.shields.io/github/v/release/stavros-it/EXTReader?label=release)
+<h1 align="center">EXTReader</h1>
 
-A native Windows 11 desktop application for browsing and extracting files from Linux EXT2/EXT3/EXT4 filesystems — strictly **read-only**.
+<p align="center">
+  <a href="https://github.com/stavros-it/EXTReader/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/stavros-it/EXTReader/ci.yml?branch=main&label=CI&logo=github" alt="CI"></a>
+  <img src="https://img.shields.io/badge/.NET-8.0-512bd4?logo=dotnet" alt=".NET 8.0">
+  <img src="https://img.shields.io/badge/C%23-12.0-239120?logo=csharp" alt="C# 12.0">
+  <img src="https://img.shields.io/badge/WPF--UI-4.3.0-6750A0" alt="WPF-UI 4.3.0">
+  <img src="https://img.shields.io/badge/platform-Windows-0078D4?logo=windows" alt="Windows">
+  <img src="https://img.shields.io/badge/tests-16-brightgreen" alt="16 tests">
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/stavros-it/EXTReader?color=blue" alt="GPL-2.0"></a>
+  <a href="https://github.com/stavros-it/EXTReader/releases/latest"><img src="https://img.shields.io/github/v/release/stavros-it/EXTReader?label=release" alt="Release"></a>
+</p>
+
+<p align="center">
+  A native Windows 11 desktop application for browsing and extracting files from Linux EXT2/EXT3/EXT4 filesystems — strictly <b>read-only</b>.
+</p>
 
 ## Features
 
